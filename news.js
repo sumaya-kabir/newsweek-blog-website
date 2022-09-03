@@ -41,28 +41,61 @@ const displayNews = newsAll => {
                 <div class="card-body">
                 <h2 class="card-title">${news.title}</h2>
                 <p>${news.details.slice(0, 200)}...</p>
-                <div class="flex" >
+                <div class="flex justify-between" >
+                <div class="flex">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar mr-5">
                     <div class="w-10 rounded-full">
                     <img src="${news.author.img}" />
                     </div>
                 </label>
                 <div>
-                <p class="font-medium text-gray-600">${news.author.name}</p>
-                <p>${news.author.published_date
-                }</p>
+                <p class="font-medium text-gray-800">${news.author.name ? news.author.name : 'No data available'}</p>
+                <p>${news.author.published_date}</p>
+                </div>
+                </div>
+                <div class="flex text-center text-xl mt-2">
+                <i class="fa-solid fa-eye mt-1"></i>
+                <p class="ml-3">${news.total_view ? news.total_view : 'No data available'}</p>
+                </div>
+                <div class="flex mt-3">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="card-actions justify-end">
+        
+                <label onclick="openNewsDetail('${news._id}')" for="my-modal-5" class="btn btn-primary">Know More</label>
+                </div>
                 </div>
                 </div>
                 
-                <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Know More</button>
-                </div>
-                </div>
             </div>
 
     `;
     newsContainer.appendChild(newsDiv);
     })
+}
+
+const openNewsDetail = async (_id) => {
+    const url = ` https://openapi.programming-hero.com/api/news/${_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsDetail(data.data[0]);
+}
+
+const displayNewsDetail = news => {
+    const title = document.getElementById('title');
+    title.innerText=`${news.title}`;
+    const fullDetails = document.getElementById('details');
+    fullDetails.innerText= `${news.details}`;
+    const info = document.getElementById('info');
+    info.innerHTML=`
+    <p class="font-medium text-gray-800">${news.author.name ? news.author.name : 'No data available'}</p>
+    <p>${news.author.published_date}</p>
+    `;
 }
 
 loadCategory();
