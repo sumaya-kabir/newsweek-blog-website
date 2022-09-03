@@ -10,13 +10,14 @@ const displayCategory = categories => {
         const categoryContainer = document.getElementById('category-container');
         const categoryDiv = document.createElement('div');
         categoryDiv.innerHTML = `
-        <div onclick="loadNews('${category.category_id}')" class="tabs"> 
-        <a class="tab">${category.category_name}</a> 
+        <div onclick="loadNews('${category.category_id}');toggleSpinner(true);" class="tabs"> 
+        <a class="tab mb-8">${category.category_name}</a> 
       </div>
         `;
 
         categoryContainer.appendChild(categoryDiv);
     })
+    
 }
 
 const loadNews = async (category_id) => {
@@ -76,7 +77,9 @@ const displayNews = newsAll => {
 
     `;
     newsContainer.appendChild(newsDiv);
-    })
+    });
+    // stop spinner or loader
+    toggleSpinner(false);
 }
 
 const openNewsDetail = async (_id) => {
@@ -96,6 +99,15 @@ const displayNewsDetail = news => {
     <p class="font-medium text-gray-800">${news.author.name ? news.author.name : 'No data available'}</p>
     <p>${news.author.published_date}</p>
     `;
+}
+
+const toggleSpinner = isSpinning => {
+    if(isSpinning){
+        const spinner = document.getElementById('spinner');
+        spinner.classList.remove('hidden');
+    } else {
+        spinner.classList.add('hidden');
+    }
 }
 
 loadCategory();
