@@ -25,7 +25,28 @@ const loadNews = async (category_id) => {
     `;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data);
+    displayNews(data.data);
+}
+
+const displayNews = newsAll => {
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = ``;
+    newsAll.forEach(news => {
+        const newsDiv = document.createElement('div');
+    newsDiv.innerHTML = `
+    
+            <a href="#" class="flex flex-col justify-center items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <img class="w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="${news.image_url
+            }" alt="">
+            <div class="flex flex-col justify-between p-4 leading-normal">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${news.title}</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${news.details.slice(0, 200)}...</p>
+            </div>
+            </a>
+
+    `;
+    newsContainer.appendChild(newsDiv);
+    })
 }
 
 loadCategory();
