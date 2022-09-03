@@ -54,12 +54,11 @@ const displayNews = newsAll => {
                 <p>${news.author.published_date}</p>
                 </div>
                 </div>
-                <div class="flex text-center text-xl mt-2">
+                <div class="flex text-center sm:hidden lg:block text-xl mt-2">
                 <i class="fa-solid fa-eye mt-1"></i>
                 <p class="ml-3">${news.total_view ? news.total_view : 'No data available'}</p>
                 </div>
-                <div class="flex mt-3">
-                <i class="fa-solid fa-star"></i>
+                <div class="flex mt-3 md:hidden lg:block lg:m-5">
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
