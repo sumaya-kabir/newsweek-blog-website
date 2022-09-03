@@ -7,10 +7,11 @@ const loadCategory = async () => {
 
 const displayCategory = categories => {
     categories.forEach(category => {
+        // console.log(categories);
         const categoryContainer = document.getElementById('category-container');
         const categoryDiv = document.createElement('div');
         categoryDiv.innerHTML = `
-        <div onclick="loadNews('${category.category_id}');toggleSpinner(true);" class="tabs"> 
+        <div onclick="loadNews('${category.category_id}');toggleSpinner(true);resultFound('${category.category_id}')" class="tabs"> 
         <a class="tab mb-8">${category.category_name}</a> 
       </div>
         `;
@@ -34,7 +35,6 @@ const displayNews = newsAll => {
     newsContainer.innerHTML = ``;
     newsAll.forEach(news => {
         const newsDiv = document.createElement('div');
-        // newsDiv.className = 'w-full';
     newsDiv.innerHTML = `
     
                 <div class="my-12 p-12 card lg:card-side bg-gray-100 shadow-xl">
@@ -77,7 +77,9 @@ const displayNews = newsAll => {
 
     `;
     newsContainer.appendChild(newsDiv);
+    
     });
+    
     // stop spinner or loader
     toggleSpinner(false);
 }
@@ -110,4 +112,19 @@ const toggleSpinner = isSpinning => {
     }
 }
 
+const resultFound = async (category_id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`);
+    const data = await res.json();
+    displayResult(data.data);
+    
+}
+
+const displayResult = category => {
+    const result = document.getElementById('result');
+    result.classList.remove('hidden');
+    result.innerHTML = `
+    <p><strong>${category.length}</strong> items found for this category</p>
+    `;
+}
+loadNews('01');
 loadCategory();
