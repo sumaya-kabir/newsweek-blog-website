@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header class="mx-24">
+        <!-- Navbar Start -->
+        <nav>
+          <div class="navbar bg-base-100">
+            <div class="flex-1">
+              <a class="btn btn-ghost text-primary normal-case text-xl">NewsWeek</a>
+            </div>
+            <div class="flex-none">
+              <ul class="menu menu-horizontal p-0">
+                <li><a href="index.html">News</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+  
+  <!-- Navbar End  -->
+  
+    </header>
+
+    <main class="mx-48 mt-12">
+        <article class="p-12">
+            <h2 class="text-4xl">Q.1 What is the difference between var, let and const?</h2>
+            <p>
+                The scope of a var variable is functional scope. The scope of a let variable is block scope. The scope of a const variable is block scope. It can be updated and re-declared into the scope.
+                <br>
+                While var and let can be re-declared without being initialized but const should be initialized during declaration.
+                <br>
+                They all are hoisted at the top but with var, it is initialized with a default value, unlike let and const are not initialized.
+                <br>
+                For scoping and re-declaration see the below table for better clarity
+            </p>
+        </article>
+        <article class="p-12">
+            <h2 class="text-4xl">Q.2 What is the difference between arrow and regular functions?</h2>
+            <p>
+                Arrow function — also called fat arrow function— is a new feature introduced in ES6 that is a more concise syntax for writing function expressions. While both regular JavaScript functions and arrow functions work in a similar manner, there are certain differences between them.
+                <br>
+                Arrow functions do not have an arguments binding. However, they have access to the arguments object of the closest non-arrow parent function. Named and rest parameters are heavily relied upon to capture the arguments passed to arrow functions.
+                <br>
+                Unlike regular functions, arrow functions do not have their own this. The value of this inside an arrow function remains the same throughout the lifecycle of the function and is always bound to the value of this in the closest non-arrow parent function.
+                <br>
+                Regular functions created using function declarations or expressions are constructible and callable. Since regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.
+            </p>
+        </article>
+        <article class="p-12">
+            <h2 class="text-4xl">Q.3 What is the difference between map, forEach, find and filter method?</h2>
+            <p>
+                The forEach() method does not create a new array based on the given array. The map() method creates an entirely new array. The forEach() method returns “undefined“. The map() method returns the newly created array according to the provided callback function.
+                <br>
+                find is a function that iterates through an array and returns the first element in the array that matches the given predicate.
+                <br>
+                filter is a function that iterates through an array and returns a new array of all elements in the array that matches the given predicate.
+                <br>
+                filter() basically runs through the entire array to see if the given predicate is matched which means you should be only using it if you expect more than one item to match this predicate. Although, this seems like a pretty simple thing to remember a lot of the times we see people using filter in place of find().
+                When you want to search for an element in the array use find() instead of returning an array from filter.
+
+            </p>
+        </article>
+        <article class="p-12">
+            <h2 class="text-4xl">Q.4 Why we used template string?</h2>
+            <p>
+                Template strings are a powerful feature of modern JavaScript released in ES6. It lets us insert/interpolate variables and expressions into strings without needing to concatenate like in older versions of JavaScript. It allows us to create strings that are complex and contain dynamic elements. Another great thing that comes with template strings are tags. Tags are functions that take a string and the decomposed parts of the string as parameters and are great for converting strings to different entities.
+                <br>
+                The syntax for creating template strings is by using backticks to delimit them. For example, we can write:
+                <br>
+                `This is a string`
+                <br>
+                This is a very simple example of a template string. All the content is constant and there are no variables or expressions in it. To add variables and or expressions to a string, we can do the following.
+            </p>
+        </article>
+    </main>
+
+        <footer class="bg-gray-100 text-center font-semibold text-gray-600 py-5 mt-24">
+            <p>Copyright 2022 <span class="text-lg text-primary">NewsWeek</span></p>
+        </footer>
+
+      <script src="https://cdn.tailwindcss.com"></script>
+    <script src="news.js"></script>
+</body>
+</html>

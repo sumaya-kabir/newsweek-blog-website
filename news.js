@@ -23,15 +23,23 @@ const displayCategory = categories => {
 
 const loadNews = async (category_id) => {
     const url = `
-    https://openapi.programming-hero.com/api/news/category/${category_id}
-    `;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNews(data.data);
+        https://openapi.programming-hero.com/api/news/category/${category_id}
+        `;
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNews(data.data);
+    }
+    catch(error){
+        console.log(error);
+    }
 }
 
 const displayNews = newsAll => {
     const newsContainer = document.getElementById('news-container');
+    newsAll.sort((a, b) => {
+        return b.total_view - a.total_view;
+        });
     newsContainer.innerHTML = ``;
     newsAll.forEach(news => {
         const newsDiv = document.createElement('div');
@@ -58,7 +66,7 @@ const displayNews = newsAll => {
                 <i class="fa-solid fa-eye mt-1"></i>
                 <p class="ml-3">${news.total_view ? news.total_view : 'No data available'}</p>
                 </div>
-                <div class="flex mt-3 md:hidden lg:block lg:m-5">
+                <div class="flex mt-3 md:hidden lg:block">
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
@@ -79,15 +87,21 @@ const displayNews = newsAll => {
     
     });
     
+    
     // stop spinner or loader
     toggleSpinner(false);
 }
 
 const openNewsDetail = async (_id) => {
     const url = ` https://openapi.programming-hero.com/api/news/${_id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsDetail(data.data[0]);
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsDetail(data.data[0]);
+    }
+    catch(error){
+        console.log(error);
+    }
 }
 
 const displayNewsDetail = news => {
@@ -112,9 +126,14 @@ const toggleSpinner = isSpinning => {
 }
 
 const resultFound = async (category_id) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`);
-    const data = await res.json();
-    displayResult(data.data);
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        displayResult(data.data);
+    } catch(error) {
+        console.log(error);
+    }
     
 }
 
